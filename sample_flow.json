@@ -1,0 +1,10 @@
+{
+  "name": "flujo_captura_basico",
+  "steps": [
+    {"id": "welcome", "text": "Hola 👋, soy el asistente de ventas. ¿En qué producto estás interesado?"},
+    {"id": "ask_name", "text": "Perfecto. ¿Me puedes dar tu nombre completo?"},
+    {"id": "ask_phone", "text": "Gracias, ¿puedes confirmar tu número de teléfono para contactarte?"},
+    {"id": "consent", "text": "Antes de continuar necesitamos tu consentimiento para procesar tus datos personales (nombre, teléfono e interés) y para que un asesor pueda contactarte. No ofrecemos asesoría médica ni sustituimos una consulta profesional. ¿Aceptas que procesemos tus datos para contactarte y gestionar la posible venta? Responde Sí o No."},
+    {"id": "end", "text": "Gracias. Un asesor te contactará pronto para continuar con la compra."}
+  ]
+}
