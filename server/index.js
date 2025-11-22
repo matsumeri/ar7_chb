@@ -41,6 +41,21 @@ app.prepare().then(() => {
 
   // Webhook endpoint que maneja el flujo conversacional y guarda en SQLite
   const handlers = require('./handlers');
+  // Verificación para Webhooks de Facebook/Meta (WhatsApp Cloud)
+  // Responde al challenge GET que envía Meta cuando registras la URL.
+  server.get('/api/webhook', (req, res) => {
+    const mode = req.query['hub.mode'];
+    const token = req.query['hub.verify_token'];
+    const challenge = req.query['hub.challenge'];
+    const expected = process.env.WHATSAPP_VERIFY_TOKEN || process.env.VERIFY_TOKEN || 'mi-token-de-prueba';
+    if (mode && token) {
+      if (mode === 'subscribe' && token === expected) {
+        return res.status(200).send(challenge);
+      }
+      return res.status(403).send('Forbidden');
+    }
+    return res.status(400).send('Bad Request');
+  });
   server.post('/api/webhook', async (req, res) => {
     try {
       const result = await handlers.processIncoming(req.body || {});
